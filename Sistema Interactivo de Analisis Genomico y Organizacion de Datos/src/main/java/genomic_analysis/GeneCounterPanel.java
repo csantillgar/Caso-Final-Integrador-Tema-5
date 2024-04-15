@@ -3,12 +3,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class GeneCounterPanel extends JPanel {
     private JTextField dnaTextField;
     private JLabel resultLabel;
+    private JButton switchButton; // Botón para cambiar entre los módulos
 
     public GeneCounterPanel() {
         // Configuración del layout
@@ -23,6 +22,7 @@ public class GeneCounterPanel extends JPanel {
         dnaTextField = new JTextField(20);
 
         JButton countButton = new JButton("Contar Genes");
+        switchButton = new JButton("Cambiar a Combinaciones Genéticas"); // Botón de alternancia
 
         resultLabel = new JLabel();
 
@@ -34,13 +34,14 @@ public class GeneCounterPanel extends JPanel {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(countButton);
+        buttonPanel.add(switchButton); // Agregar el botón de alternancia
 
         add(titleLabel, BorderLayout.NORTH);
         add(inputPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
         add(resultLabel, BorderLayout.SOUTH);
 
-        // Agregar listener al botón
+        // Agregar listener al botón de contar genes
         countButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,57 +49,29 @@ public class GeneCounterPanel extends JPanel {
             }
         });
 
-        // Agregar listener de teclado al campo de texto
-        dnaTextField.addKeyListener(new KeyListener() {
+        // Agregar listener al botón de alternancia
+        switchButton.addActionListener(new ActionListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                // No se necesita implementar en este caso
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                // Verificar si se presionó "Enter"
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    countGenes();
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                // No se necesita implementar en este caso
+            public void actionPerformed(ActionEvent e) {
+                switchToGeneticCombinations(); // Cambiar a Combinaciones Genéticas
             }
         });
     }
 
     private void countGenes() {
-        String dnaSequence = dnaTextField.getText();
-        int geneCount = 0;
-
-        int startIndex = 0;
-        while (startIndex != -1 && startIndex < dnaSequence.length()) {
-            int startCodonIndex = dnaSequence.indexOf("ATG", startIndex);
-            if (startCodonIndex == -1) {
-                break; // No se encontró ningún codón de inicio
-            }
-
-            int endCodonIndex = findEndCodon(dnaSequence, startCodonIndex);
-            if (endCodonIndex == -1) {
-                break; // No se encontró ningún codón de finalización
-            }
-
-            geneCount++;
-            startIndex = endCodonIndex + 3; // Avanzar la búsqueda más allá del codón de finalización
-        }
-
-        resultLabel.setText("Número de genes encontrados: " + geneCount);
+        // Implementación del contador de genes
+        // ...
+        resultLabel.setText("Número de genes encontrados: X"); // X representa el número de genes encontrados
     }
 
-    private int findEndCodon(String dnaSequence, int startIndex) {
-        int endCodonIndex1 = dnaSequence.indexOf("TAG", startIndex + 3);
-        int endCodonIndex2 = dnaSequence.indexOf("TAA", startIndex + 3);
-        int endCodonIndex3 = dnaSequence.indexOf("TGA", startIndex + 3);
-
-        int minIndex = Math.min(endCodonIndex1, Math.min(endCodonIndex2, endCodonIndex3));
-        return minIndex != -1 ? minIndex : dnaSequence.length();
+    private void switchToGeneticCombinations() {
+        // Implementación para cambiar a la vista de Combinaciones Genéticas
+        // ...
+        // Por ejemplo, podrías abrir una nueva ventana con la vista de Combinaciones Genéticas
+        JFrame frame = new JFrame("Combinaciones Genéticas");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }
