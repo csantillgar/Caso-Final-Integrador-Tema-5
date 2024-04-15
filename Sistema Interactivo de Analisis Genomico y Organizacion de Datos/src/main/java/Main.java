@@ -1,5 +1,7 @@
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+import genomic_analysis.GeneCounterPanel;
+import genomic_analysis.CountGenes;
+
 
 public class Main {
     public static void main(String[] args) {
