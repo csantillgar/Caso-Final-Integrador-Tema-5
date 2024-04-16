@@ -12,9 +12,43 @@ import java.awt.event.ActionListener;
 public class MainFrame extends JFrame {
     public MainFrame() {
         setTitle("Sistema Interactivo de Análisis Genómico");
-        setSize(400, 300);
+        setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centrar la ventana en la pantalla
+
+        // Crear un JPanel para organizar los componentes
+        JPanel mainPanel = new JPanel(new BorderLayout());
+
+        // Agregar el título de la tarea
+        JPanel titlePanel = new JPanel();
+        titlePanel.setBackground(Color.WHITE);
+        JLabel titleLabel = new JLabel("Caso Final Integrador Tema 5");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 20)); // Establecer el tamaño y estilo de la fuente
+        titlePanel.add(titleLabel);
+
+        // Agregar el JPanel del título al JPanel principal en la parte superior
+        mainPanel.add(titlePanel, BorderLayout.NORTH);
+
+        // Crear un JPanel para la imagen del logo
+        JPanel logoPanel = new JPanel();
+        logoPanel.setBackground(Color.WHITE); // Establecer el fondo blanco para el contraste
+        ImageIcon logoIcon = new ImageIcon("logo.png");
+        JLabel logoLabel = new JLabel(logoIcon);
+        logoPanel.add(logoLabel);
+
+        // Agregar el JPanel del logo al JPanel principal en el lado izquierdo
+        mainPanel.add(logoPanel, BorderLayout.WEST);
+        // Agregar el JPanel principal a la ventana
+        add(mainPanel);
+
+        // Agregar nombre
+        JLabel nameLabel = new JLabel("Cintia Santillán García");
+        nameLabel.setFont(new Font("Arial", Font.PLAIN, 12)); // Personalizar el estilo del texto
+        nameLabel.setHorizontalAlignment(SwingConstants.RIGHT); // Alinear a la derecha
+        mainPanel.add(nameLabel, BorderLayout.SOUTH);
+
+        // Agregar el panel principal a la ventana
+        add(mainPanel);
 
         // Crear botones
         JButton geneCounterButton = new JButton("Contador de Genes");
